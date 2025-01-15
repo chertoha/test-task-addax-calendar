@@ -2,10 +2,12 @@ import { useState } from "react";
 import { calculateCalendar } from "../../helpers/calculateCalendar";
 import styled from "styled-components";
 import Day from "../Day";
+import { useSelector } from "react-redux";
+import { selectTasks } from "@/redux/tasks/selectors";
+import { areDatesEqual } from "@/utils/date";
 
 export const Wrapper = styled("div")`
   height: 100vh;
-  /* outline: 5px solid red; */
 `;
 
 export const List = styled("ul")`
@@ -25,10 +27,16 @@ export const Item = styled("li")`
 
 const Calendar = () => {
   const [offset, setOffset] = useState<number>(0);
+  const tasks = useSelector(selectTasks);
 
   const calendar = calculateCalendar(offset);
 
-  console.log(calendar);
+  // const filteredTasks = tasks.filter(({ date: taskDate }) => areDatesEqual(taskDate, date));
+
+  const findDayTasks = (dayDate: Date) =>
+    tasks.filter(({ date }) => areDatesEqual(dayDate, new Date(date)));
+
+  console.log(tasks);
 
   return (
     <>
@@ -36,7 +44,7 @@ const Calendar = () => {
         <List>
           {calendar.map(date => (
             <Item key={date.toString()}>
-              <Day date={date} />
+              <Day date={date} tasks={findDayTasks(date)} />
             </Item>
           ))}
         </List>

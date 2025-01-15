@@ -1,6 +1,8 @@
+import { DragEvent, FC } from "react";
 import styled from "styled-components";
+import { TaskType } from "../../types/entities";
 
-export const Wrapper = styled("label")`
+export const Card = styled("label")`
   display: block;
   padding: 5px 10px;
   background-color: #ffffff;
@@ -13,8 +15,20 @@ export const Wrapper = styled("label")`
   cursor: pointer;
 `;
 
-const Task = () => {
-  return <Wrapper>How to Structure Additional Calendar</Wrapper>;
+interface IProps {
+  data: TaskType;
+}
+
+const Task: FC<IProps> = ({ data: { value, id } }) => {
+  const handleDragStart = (event: DragEvent<HTMLLabelElement>) => {
+    event.dataTransfer.setData("text/plain", id.toString());
+  };
+
+  return (
+    <Card draggable onDragStart={handleDragStart}>
+      {value}
+    </Card>
+  );
 };
 
 export default Task;

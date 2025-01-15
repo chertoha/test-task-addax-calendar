@@ -2,10 +2,10 @@ import Calendar from "../Calendar";
 
 const App = () => {
   return (
-    <div style={{ display: "flex", flexDirection: "column", maxHeight: "100vh" }}>
-      <div style={{ height: "200px" }}></div>
+    <main style={{ display: "flex", flexDirection: "column", maxHeight: "100vh" }}>
+      <header style={{ height: "200px" }}></header>
       <Calendar />
-    </div>
+    </main>
   );
 };
 

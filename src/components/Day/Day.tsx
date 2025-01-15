@@ -2,6 +2,8 @@ import { FC } from "react";
 import styled from "styled-components";
 import TaskList from "../TaskList";
 
+import { TaskType } from "@/types/entities";
+
 export const Wrapper = styled("div")`
   padding: 10px;
   display: flex;
@@ -13,13 +15,14 @@ export const Wrapper = styled("div")`
 
 interface IProps {
   date: Date;
+  tasks: TaskType[];
 }
 
-const Day: FC<IProps> = ({ date }) => {
+const Day: FC<IProps> = ({ date, tasks }) => {
   return (
     <Wrapper>
       <div style={{ marginBottom: "5px" }}>{date.getDate()}</div>
-      <TaskList />
+      <TaskList list={tasks} date={date} />
     </Wrapper>
   );
 };
