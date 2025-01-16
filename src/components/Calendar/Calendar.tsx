@@ -16,7 +16,7 @@ export const List = styled("ul")`
   height: 100%;
 
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(6, 1fr);
+  grid-template-rows: repeat(6, minmax(0, 1fr));
 
   gap: 5px;
 `;
@@ -31,12 +31,12 @@ const Calendar = () => {
 
   const calendar = calculateCalendar(offset);
 
-  // const filteredTasks = tasks.filter(({ date: taskDate }) => areDatesEqual(taskDate, date));
-
   const findDayTasks = (dayDate: Date) =>
-    tasks.filter(({ date }) => areDatesEqual(dayDate, new Date(date)));
+    tasks
+      .filter(({ date }) => areDatesEqual(dayDate, new Date(date)))
+      .sort((a, b) => a.order - b.order);
 
-  console.log(tasks);
+  // console.log(tasks);
 
   return (
     <>

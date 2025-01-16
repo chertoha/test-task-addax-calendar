@@ -22,7 +22,9 @@ const Day: FC<IProps> = ({ date, tasks }) => {
   return (
     <Wrapper>
       <div style={{ marginBottom: "5px" }}>{date.getDate()}</div>
-      <TaskList list={tasks} date={date} />
+      <div style={{ overflow: "auto" }}>
+        <TaskList list={tasks} date={date} />
+      </div>
     </Wrapper>
   );
 };

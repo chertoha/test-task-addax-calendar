@@ -18,14 +18,42 @@ const initialState: InitialState = {
       id: 2,
       value: "How to use Trello Like a Pro",
       date: new Date(2025, 0, 2).toISOString(),
-      order: 2,
+      order: 1,
     },
 
     {
       id: 3,
       value: "Common Questions",
       date: new Date(2025, 0, 20).toISOString(),
+      order: 1,
+    },
+
+    {
+      id: 4,
+      value: "How We Structure Our CSS",
+      date: new Date(2025, 0, 2).toISOString(),
+      order: 2,
+    },
+
+    {
+      id: 5,
+      value: "Create Cards via Email",
+      date: new Date(2025, 0, 2).toISOString(),
       order: 3,
+    },
+
+    {
+      id: 6,
+      value: "Temp1",
+      date: new Date(2025, 0, 2).toISOString(),
+      order: 4,
+    },
+
+    {
+      id: 7,
+      value: "Temp2",
+      date: new Date(2025, 0, 2).toISOString(),
+      order: 5,
     },
   ],
 };
