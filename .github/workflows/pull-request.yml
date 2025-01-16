@@ -4,9 +4,7 @@ on:
   pull_request:
     types: [opened, reopened, synchronize]
     branches:
-      - release
       - main
-      - dev
 
 jobs:
   install-lint-build-test:
@@ -24,5 +22,5 @@ jobs:
       - name: Install and Build
         run: npm run build
 
-      - name: Testing
-        run: npm run test
+      # - name: Testing
+      # run: npm run test

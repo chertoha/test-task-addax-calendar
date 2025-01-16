@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
         overflow-x: hidden;
         margin: 0;
         padding: 0;
-        font-size: 16px;
+        font-size: 12px;
         line-height: 1.17;
         color: #000000;
         background-color: #ffffff;
