@@ -19,14 +19,15 @@ interface IProps {
   data: TaskType;
 }
 
-const Task: FC<IProps> = ({ data: { value, id } }) => {
+const Task: FC<IProps> = ({ data }) => {
+  const { value } = data;
+
   const handleDragStart = (event: DragEvent<HTMLLabelElement>) => {
-    event.dataTransfer.setData("text/plain", id.toString());
+    event.dataTransfer.setData("application/json", JSON.stringify({ ...data }));
   };
 
   const handleDragOver = (event: DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
-    console.log("over");
   };
 
   return (

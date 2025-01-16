@@ -7,7 +7,7 @@ import { selectTasks } from "@/redux/tasks/selectors";
 import { areDatesEqual } from "@/utils/date";
 
 export const Wrapper = styled("div")`
-  height: 100vh;
+  height: 100%;
 `;
 
 export const List = styled("ul")`

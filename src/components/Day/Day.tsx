@@ -13,6 +13,18 @@ export const Wrapper = styled("div")`
   height: 100%;
 `;
 
+export const TaskListContainer = styled("div")`
+  height: 100%;
+  overflow: auto;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
 interface IProps {
   date: Date;
   tasks: TaskType[];
@@ -22,9 +34,9 @@ const Day: FC<IProps> = ({ date, tasks }) => {
   return (
     <Wrapper>
       <div style={{ marginBottom: "5px" }}>{date.getDate()}</div>
-      <div style={{ overflow: "auto" }}>
+      <TaskListContainer>
         <TaskList list={tasks} date={date} />
-      </div>
+      </TaskListContainer>
     </Wrapper>
   );
 };
