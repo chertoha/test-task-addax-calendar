@@ -1,14 +1,26 @@
 import { TaskType } from "@/types/entities";
 import { DragEvent, FC, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const EmptyItem = styled("li")<{ $hovered: boolean }>`
-  min-height: ${p => (p.$hovered ? "20px" : "7px")};
-  /* outline: 2px solid red; */
+  min-height: 10px;
+  flex-shrink: 0;
+
+  ${p =>
+    p.$hovered &&
+    css`
+      min-height: 25px;
+      background-color: rgba(192, 208, 224, 0.3);
+      border-radius: 5px;
+    `}
+
+  transition: min-height 0.3s ease;
 
   &:last-child {
-    /* flex-grow: 1; */
     height: 100%;
+    min-height: 30px;
+
+    border-radius: 20px;
   }
 `;
 
@@ -33,8 +45,6 @@ const Slot: FC<Iprops> = ({ index, movingTaskHandler }) => {
   const handleDrop = (event: DragEvent<HTMLLIElement>) => {
     event.preventDefault();
     setIsSlotHovered(false);
-
-    console.log("slot index ->", index);
 
     let incomingTask: TaskType;
 

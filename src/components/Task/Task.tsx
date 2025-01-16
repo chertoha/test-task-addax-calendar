@@ -12,7 +12,7 @@ export const Card = styled("label")`
   -moz-box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.75);
 
-  cursor: pointer;
+  cursor: grab;
 `;
 
 interface IProps {
@@ -23,6 +23,7 @@ const Task: FC<IProps> = ({ data }) => {
   const { value } = data;
 
   const handleDragStart = (event: DragEvent<HTMLLabelElement>) => {
+    event.dataTransfer.effectAllowed = "move";
     event.dataTransfer.setData("application/json", JSON.stringify({ ...data }));
   };
 
