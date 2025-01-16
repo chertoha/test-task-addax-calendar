@@ -9,6 +9,14 @@ export const List = styled("ul")`
   flex-grow: 1;
 `;
 
+export const Item = styled("li")`
+  margin-bottom: 5px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
 interface IProps {
   list: TaskType[];
   date: Date;
@@ -30,9 +38,9 @@ const TaskList: FC<IProps> = ({ list, date }) => {
   return (
     <List onDrop={handleDrop} onDragOver={handleDragOver}>
       {list.map(data => (
-        <li key={data.id}>
+        <Item key={data.id}>
           <Task data={data} />
-        </li>
+        </Item>
       ))}
     </List>
   );

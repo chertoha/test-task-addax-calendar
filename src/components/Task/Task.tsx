@@ -24,8 +24,13 @@ const Task: FC<IProps> = ({ data: { value, id } }) => {
     event.dataTransfer.setData("text/plain", id.toString());
   };
 
+  const handleDragOver = (event: DragEvent<HTMLLabelElement>) => {
+    event.preventDefault();
+    console.log("over");
+  };
+
   return (
-    <Card draggable onDragStart={handleDragStart}>
+    <Card draggable onDragStart={handleDragStart} onDragOver={handleDragOver}>
       {value}
     </Card>
   );
