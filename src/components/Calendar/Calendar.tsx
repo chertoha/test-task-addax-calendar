@@ -26,7 +26,7 @@ export const Item = styled("li")`
 `;
 
 const Calendar = () => {
-  const [offset, setOffset] = useState<number>(0);
+  const [offset, _setOffset] = useState<number>(0);
   const tasks = useSelector(selectTasks);
 
   const calendar = calculateCalendar(offset);
