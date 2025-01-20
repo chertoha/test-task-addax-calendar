@@ -35,7 +35,10 @@ const Day: FC<IProps> = ({ date, tasks }) => {
     <Wrapper>
       <div style={{ marginBottom: "5px" }}>{date.getDate()}</div>
       <TaskListContainer>
-        <TaskList list={tasks} date={date} />
+        <TaskList
+          list={tasks}
+          date={date}
+        />
       </TaskListContainer>
     </Wrapper>
   );

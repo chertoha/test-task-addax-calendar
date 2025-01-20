@@ -44,7 +44,10 @@ const Calendar = () => {
         <List>
           {calendar.map(date => (
             <Item key={date.toString()}>
-              <Day date={date} tasks={findDayTasks(date)} />
+              <Day
+                date={date}
+                tasks={findDayTasks(date)}
+              />
             </Item>
           ))}
         </List>

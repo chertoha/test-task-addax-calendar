@@ -37,7 +37,11 @@ const TaskList: FC<IProps> = ({ list, date }) => {
     <List onDragOver={handleListDragOver}>
       {slotList.map((data, index) =>
         !data ? (
-          <Slot index={index} key={nanoid(4)} movingTaskHandler={movingTaskHandler} />
+          <Slot
+            index={index}
+            key={nanoid(4)}
+            movingTaskHandler={movingTaskHandler}
+          />
         ) : (
           <li key={data.id}>
             <Task data={data} />

@@ -32,7 +32,11 @@ const Task: FC<IProps> = ({ data }) => {
   };
 
   return (
-    <Card draggable onDragStart={handleDragStart} onDragOver={handleDragOver}>
+    <Card
+      draggable
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
+    >
       {value}
     </Card>
   );
