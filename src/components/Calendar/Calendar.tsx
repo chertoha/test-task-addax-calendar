@@ -15,7 +15,7 @@ export const List = styled("ul")`
 
   height: 100%;
 
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   grid-template-rows: repeat(6, minmax(0, 1fr));
 
   gap: 5px;
