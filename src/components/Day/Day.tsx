@@ -14,6 +14,10 @@ export const Wrapper = styled("div")`
 
   background-color: #e3e5e6;
   height: 100%;
+
+  &:hover button {
+    display: block;
+  }
 `;
 
 export const TaskListContainer = styled("div")`
