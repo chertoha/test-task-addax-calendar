@@ -20,10 +20,18 @@ export const Card = styled("label")`
   cursor: grab;
 `;
 
-export const Input = styled("input")`
+export const Area = styled("textarea")`
   display: block;
   width: 100%;
   outline: none;
+  border: none;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 interface IProps {
@@ -38,7 +46,7 @@ const Task: FC<IProps> = ({ data, isNewTask }) => {
   const [value, setValue] = useState<string>(data.value);
   const [isEditMode, setIsEditMode] = useState<boolean>(isNewTask);
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     if (data.value !== value) {
@@ -62,7 +70,7 @@ const Task: FC<IProps> = ({ data, isNewTask }) => {
     event.preventDefault();
   };
 
-  const handleOnPressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleOnPressEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.code === "Enter") setIsEditMode(false);
   };
 
@@ -79,13 +87,13 @@ const Task: FC<IProps> = ({ data, isNewTask }) => {
       onDoubleClick={() => setIsEditMode(true)}
     >
       {isEditMode ? (
-        <Input
+        <Area
           ref={inputRef}
           value={value}
           onChange={e => setValue(e.target.value)}
           onBlur={() => setIsEditMode(false)}
           onKeyDown={handleOnPressEnter}
-        />
+        ></Area>
       ) : (
         <>{value}</>
       )}
