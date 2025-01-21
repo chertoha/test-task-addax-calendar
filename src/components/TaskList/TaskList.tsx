@@ -16,9 +16,10 @@ export const List = styled("ul")`
 interface IProps {
   list: TaskType[];
   date: Date;
+  newTaskId: number | string | null;
 }
 
-const TaskList: FC<IProps> = ({ list, date }) => {
+const TaskList: FC<IProps> = ({ list, date, newTaskId }) => {
   const handleListDragOver = (event: DragEvent<HTMLUListElement>) => {
     event.preventDefault();
   };
@@ -37,10 +38,17 @@ const TaskList: FC<IProps> = ({ list, date }) => {
     <List onDragOver={handleListDragOver}>
       {slotList.map((data, index) =>
         !data ? (
-          <Slot index={index} key={nanoid(4)} movingTaskHandler={movingTaskHandler} />
+          <Slot
+            index={index}
+            key={nanoid(4)}
+            movingTaskHandler={movingTaskHandler}
+          />
         ) : (
           <li key={data.id}>
-            <Task data={data} />
+            <Task
+              data={data}
+              isNewTask={newTaskId === data.id}
+            />
           </li>
         )
       )}

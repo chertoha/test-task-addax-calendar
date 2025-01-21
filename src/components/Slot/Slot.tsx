@@ -1,3 +1,4 @@
+import { useTrashContext } from "@/hooks/useTrashContext";
 import { TaskType } from "@/types/entities";
 import { DragEvent, FC, useState } from "react";
 import styled, { css } from "styled-components";
@@ -17,7 +18,7 @@ export const EmptyItem = styled("li")<{ $hovered: boolean }>`
   transition: min-height 0.3s ease;
 
   &:last-child {
-    height: 100%;
+    /* height: 100%; */
     min-height: 30px;
 
     border-radius: 20px;
@@ -31,6 +32,7 @@ interface Iprops {
 
 const Slot: FC<Iprops> = ({ index, movingTaskHandler }) => {
   const [isSlotHovered, setIsSlotHovered] = useState<boolean>(false);
+  const { closeTrash } = useTrashContext();
 
   const handleDragOver = (event: DragEvent<HTMLLIElement>) => {
     event.preventDefault();
@@ -56,6 +58,7 @@ const Slot: FC<Iprops> = ({ index, movingTaskHandler }) => {
     }
 
     movingTaskHandler(index, incomingTask);
+    closeTrash();
   };
 
   return (

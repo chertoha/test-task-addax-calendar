@@ -1,8 +1,9 @@
-import { FC } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import TaskList from "../TaskList";
 
 import { TaskType } from "@/types/entities";
+import AddTaskButton from "../AddTaskButton";
 
 export const Wrapper = styled("div")`
   padding: 10px;
@@ -25,17 +26,56 @@ export const TaskListContainer = styled("div")`
   }
 `;
 
+export const Toolbar = styled("div")`
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 interface IProps {
   date: Date;
   tasks: TaskType[];
 }
 
 const Day: FC<IProps> = ({ date, tasks }) => {
+  const lastTaskOrder: number = tasks.length > 0 ? tasks[tasks.length - 1].order : 0;
+
+  const listRef = useRef<HTMLDivElement>(null);
+  const [newTaskId, setNewTaskId] = useState<string | number | null>(null);
+
+  useEffect(() => {
+    if (listRef.current && newTaskId) {
+      listRef.current.scrollTo({
+        top: listRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+      setNewTaskId(null);
+    }
+  }, [tasks, newTaskId]);
+
+  const showNewTask = (id: number | string) => {
+    setNewTaskId(id);
+  };
+
   return (
     <Wrapper>
-      <div style={{ marginBottom: "5px" }}>{date.getDate()}</div>
-      <TaskListContainer>
-        <TaskList list={tasks} date={date} />
+      <Toolbar>
+        <span>{date.getDate()}</span>
+
+        <AddTaskButton
+          date={date}
+          lastOrderValue={lastTaskOrder}
+          showNewTask={showNewTask}
+        />
+      </Toolbar>
+
+      <TaskListContainer ref={listRef}>
+        <TaskList
+          list={tasks}
+          date={date}
+          newTaskId={newTaskId}
+        />
       </TaskListContainer>
     </Wrapper>
   );

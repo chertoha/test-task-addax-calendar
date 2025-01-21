@@ -83,9 +83,17 @@ const tasksSlice = createSlice({
         return { ...task, ...incomingTask };
       });
     },
+
+    updateTask: (state, { payload }: PayloadAction<TaskType>) => {
+      state.items = state.items.map(task => (task.id === payload.id ? payload : task));
+    },
+
+    removeTask: (state, { payload }: PayloadAction<number | string>) => {
+      state.items = state.items.filter(({ id }) => id !== payload);
+    },
   },
 });
 
-export const { addTask, updateTaskDate, updateBunch } = tasksSlice.actions;
+export const { addTask, updateTaskDate, updateBunch, updateTask, removeTask } = tasksSlice.actions;
 
 export default tasksSlice;
