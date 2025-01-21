@@ -1,7 +1,9 @@
 import { DragEvent, FC, KeyboardEvent, useEffect, useRef, useState } from "react";
-import styled from "styled-components";
-import { TaskType } from "../../types/entities";
 import { useDispatch } from "react-redux";
+
+import styled from "styled-components";
+
+import { TaskType } from "../../types/entities";
 import { updateTask } from "@/redux/tasks/slice";
 import { useTrashContext } from "@/hooks/useTrashContext";
 
