@@ -18,7 +18,7 @@ export const EmptyItem = styled("li")<{ $hovered: boolean }>`
   transition: min-height 0.3s ease;
 
   &:last-child {
-    /* height: 100%; */
+    height: 100%;
     min-height: 30px;
 
     border-radius: 20px;

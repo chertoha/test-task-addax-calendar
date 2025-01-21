@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import tasksSlice from "./tasks/slice";
+import { holidaysApi } from "./holidays/holidaysApi";
 
 export const store = configureStore({
   reducer: {
     [tasksSlice.reducerPath]: tasksSlice.reducer,
+    [holidaysApi.reducerPath]: holidaysApi.reducer,
   },
   middleware(getDefaultMiddleware) {
-    return getDefaultMiddleware();
+    return getDefaultMiddleware().concat(holidaysApi.middleware);
   },
 });
 

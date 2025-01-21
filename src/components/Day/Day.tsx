@@ -4,6 +4,8 @@ import TaskList from "../TaskList";
 
 import { TaskType } from "@/types/entities";
 import AddTaskButton from "../AddTaskButton";
+import { useHolidaysContext } from "@/hooks/useHolidaysContext";
+import { areDatesEqual } from "@/utils/date";
 
 export const Wrapper = styled("div")`
   padding: 10px;
@@ -39,10 +41,9 @@ interface IProps {
 }
 
 const Day: FC<IProps> = ({ date, tasks }) => {
-  const lastTaskOrder: number = tasks.length > 0 ? tasks[tasks.length - 1].order : 0;
-
   const listRef = useRef<HTMLDivElement>(null);
   const [newTaskId, setNewTaskId] = useState<string | number | null>(null);
+  const { holidays } = useHolidaysContext();
 
   useEffect(() => {
     if (listRef.current && newTaskId) {
@@ -58,6 +59,12 @@ const Day: FC<IProps> = ({ date, tasks }) => {
     setNewTaskId(id);
   };
 
+  const lastTaskOrder: number = tasks.length > 0 ? tasks[tasks.length - 1].order : 0;
+
+  const holiday = holidays.find(({ date: holidayDate }) =>
+    areDatesEqual(new Date(date), new Date(holidayDate))
+  );
+
   return (
     <Wrapper>
       <Toolbar>
@@ -71,6 +78,7 @@ const Day: FC<IProps> = ({ date, tasks }) => {
       </Toolbar>
 
       <TaskListContainer ref={listRef}>
+        {holiday && <p>{holiday.name}</p>}
         <TaskList
           list={tasks}
           date={date}
