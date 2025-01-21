@@ -5,7 +5,6 @@ import { DragEvent, FC } from "react";
 import Slot from "../Slot";
 import { nanoid } from "@reduxjs/toolkit";
 import shuffleTasks from "@/helpers/shuffleTasks";
-import { useGetHolidaysQuery } from "@/redux/holidays/holidaysApi";
 
 export const List = styled("ul")`
   flex-grow: 1;
