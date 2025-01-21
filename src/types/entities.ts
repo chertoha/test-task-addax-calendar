@@ -4,3 +4,9 @@ export type TaskType = {
   date: string;
   order: number;
 };
+
+export type Holiday = {
+  date: string;
+  name: string;
+  countryCode: string;
+};
