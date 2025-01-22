@@ -16,3 +16,5 @@ function addDays(date: Date, days: number) {
 function addMonths(date: Date, months: number) {
   return new Date(date.getFullYear(), date.getMonth() + months, date.getDate());
 }
+
+export const getOffsetMonth = (offset: number) => addMonths(new Date(), offset).getMonth();

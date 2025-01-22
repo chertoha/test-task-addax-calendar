@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { calculateCalendar } from "../../helpers/calculateCalendar";
+import { calculateCalendar, getOffsetMonth } from "../../helpers/calculateCalendar";
 import styled from "styled-components";
 import Day from "../Day";
 import { useSelector } from "react-redux";
 import { selectTasks } from "@/redux/tasks/selectors";
 import { areDatesEqual } from "@/utils/date";
+import { selectOffset } from "@/redux/offset/selectors";
 
 export const Wrapper = styled("div")`
   height: 100%;
@@ -26,8 +26,10 @@ export const Item = styled("li")`
 `;
 
 const Calendar = () => {
-  const [offset, _setOffset] = useState<number>(0);
+  // const [offset, _setOffset] = useState<number>(0);
   const tasks = useSelector(selectTasks);
+
+  const offset = useSelector(selectOffset);
 
   const calendar = calculateCalendar(offset);
 
@@ -38,6 +40,8 @@ const Calendar = () => {
 
   // console.log(tasks);
 
+  const month = getOffsetMonth(offset);
+
   return (
     <>
       <Wrapper>
@@ -47,6 +51,7 @@ const Calendar = () => {
               <Day
                 date={date}
                 tasks={findDayTasks(date)}
+                month={month}
               />
             </Item>
           ))}

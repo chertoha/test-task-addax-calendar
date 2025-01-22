@@ -7,12 +7,12 @@ import AddTaskButton from "../AddTaskButton";
 import { useHolidaysContext } from "@/hooks/useHolidaysContext";
 import { areDatesEqual } from "@/utils/date";
 
-export const Wrapper = styled("div")`
+export const Wrapper = styled("div")<{ $current: boolean }>`
   padding: 10px;
   display: flex;
   flex-direction: column;
 
-  background-color: #e3e5e6;
+  background-color: ${p => (p.$current ? "#ced3d5" : "#ebebeb")};
   height: 100%;
 
   &:hover button {
@@ -42,9 +42,10 @@ export const Toolbar = styled("div")`
 interface IProps {
   date: Date;
   tasks: TaskType[];
+  month: number;
 }
 
-const Day: FC<IProps> = ({ date, tasks }) => {
+const Day: FC<IProps> = ({ date, tasks, month }) => {
   const listRef = useRef<HTMLDivElement>(null);
   const [newTaskId, setNewTaskId] = useState<string | number | null>(null);
   const { holidays } = useHolidaysContext();
@@ -70,9 +71,10 @@ const Day: FC<IProps> = ({ date, tasks }) => {
   );
 
   return (
-    <Wrapper>
+    <Wrapper $current={month === date.getMonth()}>
       <Toolbar>
         <span>{date.getDate()}</span>
+        {/* <span>{date.toDateString()}</span> */}
 
         <AddTaskButton
           date={date}
