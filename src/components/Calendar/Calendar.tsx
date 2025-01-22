@@ -1,4 +1,8 @@
-import { calculateCalendar, getOffsetMonth } from "../../helpers/calculateCalendar";
+import {
+  calculateMonthCalendar,
+  calculateWeekCalendar,
+  getOffsetMonth,
+} from "../../helpers/calculateCalendar";
 import styled from "styled-components";
 import Day from "../Day";
 import { useSelector } from "react-redux";
@@ -10,7 +14,7 @@ export const Wrapper = styled("div")`
   height: 100%;
 `;
 
-export const List = styled("ul")`
+export const MonthList = styled("ul")`
   display: grid;
 
   height: 100%;
@@ -21,16 +25,24 @@ export const List = styled("ul")`
   gap: 5px;
 `;
 
+export const WeekList = styled("ul")`
+  display: grid;
+  height: 100%;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 5px;
+`;
+
 export const Item = styled("li")`
   /* outline: 1px solid green; */
 `;
 
 const Calendar = () => {
+  const isMonth = true;
   const tasks = useSelector(selectTasks);
 
   const offset = useSelector(selectOffset);
 
-  const calendar = calculateCalendar(offset);
+  const calendar = calculateMonthCalendar(offset);
 
   const findDayTasks = (dayDate: Date) =>
     tasks
@@ -39,10 +51,12 @@ const Calendar = () => {
 
   const month = getOffsetMonth(offset);
 
+  // calculateWeekCalendar(1, 1);
+
   return (
     <>
       <Wrapper>
-        <List>
+        <MonthList>
           {calendar.map(date => (
             <Item key={date.toString()}>
               <Day
@@ -52,7 +66,7 @@ const Calendar = () => {
               />
             </Item>
           ))}
-        </List>
+        </MonthList>
       </Wrapper>
     </>
   );

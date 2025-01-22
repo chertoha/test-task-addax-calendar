@@ -22,8 +22,8 @@ export const Item = styled("li")`
 const DayList = () => {
   return (
     <List>
-      {DAYS.map(({ short }) => (
-        <Item>
+      {DAYS.map(({ short }, i) => (
+        <Item key={i}>
           <p>{short}</p>
         </Item>
       ))}
