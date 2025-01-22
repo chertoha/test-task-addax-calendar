@@ -11,7 +11,7 @@ export const EmptyItem = styled("li")<{ $hovered: boolean }>`
     p.$hovered &&
     css`
       min-height: 25px;
-      background-color: rgba(192, 208, 224, 0.3);
+      background-color: rgba(255, 255, 255, 0.3);
       border-radius: 5px;
     `}
 
