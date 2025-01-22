@@ -70,16 +70,24 @@ const Day: FC<IProps> = ({ date, tasks, month }) => {
     areDatesEqual(new Date(date), new Date(holidayDate))
   );
 
-  console.log(date);
-
   const shouldShowMonthName = isLastDayOfMonth(date) || date.getDate() === 1;
+  const cardsNum = tasks.length;
 
   return (
     <Wrapper $current={month === date.getMonth()}>
       <Toolbar>
-        <span>
-          {shouldShowMonthName && MONTHS[date.getMonth()].short} {date.getDate()}
-        </span>
+        <div style={{ display: "flex", gap: "10px" }}>
+          <span>
+            {shouldShowMonthName && MONTHS[date.getMonth()].short} {date.getDate()}
+          </span>
+
+          {!!cardsNum && (
+            <span>
+              {cardsNum}
+              {cardsNum === 1 ? " card" : " cards"}{" "}
+            </span>
+          )}
+        </div>
 
         <AddTaskButton
           date={date}
