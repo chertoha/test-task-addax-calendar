@@ -5,7 +5,7 @@ import TaskList from "../TaskList";
 import { TaskType } from "@/types/entities";
 import AddTaskButton from "../AddTaskButton";
 import { useHolidaysContext } from "@/hooks/useHolidaysContext";
-import { areDatesEqual } from "@/utils/date";
+import { areDatesEqual, isLastDayOfMonth, MONTHS } from "@/utils/date";
 
 export const Wrapper = styled("div")<{ $current: boolean }>`
   padding: 10px;
@@ -70,11 +70,16 @@ const Day: FC<IProps> = ({ date, tasks, month }) => {
     areDatesEqual(new Date(date), new Date(holidayDate))
   );
 
+  console.log(date);
+
+  const shouldShowMonthName = isLastDayOfMonth(date) || date.getDate() === 1;
+
   return (
     <Wrapper $current={month === date.getMonth()}>
       <Toolbar>
-        <span>{date.getDate()}</span>
-        {/* <span>{date.toDateString()}</span> */}
+        <span>
+          {shouldShowMonthName && MONTHS[date.getMonth()].short} {date.getDate()}
+        </span>
 
         <AddTaskButton
           date={date}

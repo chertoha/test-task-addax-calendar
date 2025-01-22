@@ -7,9 +7,6 @@ export const Wrapper = styled("div")<{ $hovered: boolean }>`
   height: 30px;
 
   transition: background-color 250ms ease-in-out;
-  /* &:hover {
-    background-color: #6aaf6a;
-  } */
 `;
 
 interface IProps {
