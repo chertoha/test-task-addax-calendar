@@ -18,3 +18,4 @@ function addMonths(date: Date, months: number) {
 }
 
 export const getOffsetMonth = (offset: number) => addMonths(new Date(), offset).getMonth();
+export const getOffsetYear = (offset: number) => addMonths(new Date(), offset).getFullYear();

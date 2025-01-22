@@ -9,11 +9,12 @@ import { areDatesEqual, isLastDayOfMonth, MONTHS } from "@/utils/date";
 
 export const Wrapper = styled("div")<{ $current: boolean }>`
   padding: 10px;
+  height: 100%;
   display: flex;
   flex-direction: column;
 
-  background-color: ${p => (p.$current ? "#ced3d5" : "#ebebeb")};
-  height: 100%;
+  background-color: ${p => (p.$current ? "#d6e8f0" : "#f3eded")};
+  border-radius: 6px;
 
   &:hover button {
     display: block;

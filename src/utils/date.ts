@@ -23,3 +23,13 @@ export const isLastDayOfMonth = (date: Date): boolean => {
   const lastDayOfMonth = new Date(nextMonthFirstDay.getTime() - 1);
   return date.getDate() === lastDayOfMonth.getDate();
 };
+
+export const DAYS = [
+  { name: "Sunday", short: "Sun" },
+  { name: "Monday", short: "Mon" },
+  { name: "Tuesday", short: "Tue" },
+  { name: "Wednesday", short: "Wed" },
+  { name: "Thursday", short: "Thu" },
+  { name: "Friday", short: "Fri" },
+  { name: "Saturday", short: "Sat" },
+];

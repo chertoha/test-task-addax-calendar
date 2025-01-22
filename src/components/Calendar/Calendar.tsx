@@ -22,11 +22,10 @@ export const List = styled("ul")`
 `;
 
 export const Item = styled("li")`
-  outline: 1px solid green;
+  /* outline: 1px solid green; */
 `;
 
 const Calendar = () => {
-  // const [offset, _setOffset] = useState<number>(0);
   const tasks = useSelector(selectTasks);
 
   const offset = useSelector(selectOffset);
@@ -37,8 +36,6 @@ const Calendar = () => {
     tasks
       .filter(({ date }) => areDatesEqual(dayDate, new Date(date)))
       .sort((a, b) => a.order - b.order);
-
-  // console.log(tasks);
 
   const month = getOffsetMonth(offset);
 
