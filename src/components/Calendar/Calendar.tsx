@@ -1,8 +1,4 @@
-import {
-  calculateMonthCalendar,
-  calculateWeekCalendar,
-  getOffsetMonth,
-} from "../../helpers/calculateCalendar";
+import { calculateMonthCalendar, getOffsetMonth } from "../../helpers/calculateCalendar";
 import styled from "styled-components";
 import Day from "../Day";
 import { useSelector } from "react-redux";
@@ -37,7 +33,6 @@ export const Item = styled("li")`
 `;
 
 const Calendar = () => {
-  const isMonth = true;
   const tasks = useSelector(selectTasks);
 
   const offset = useSelector(selectOffset);
