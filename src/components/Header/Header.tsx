@@ -2,6 +2,9 @@ import styled from "styled-components";
 import { addDays, dateToShortDayMonthString, MONTHS } from "@/utils/date";
 import useCalendar from "@/hooks/useCalendar";
 import { calculateStartDate, DAYS_IN_WEEK } from "@/helpers/calculateCalendar";
+import { useDispatch, useSelector } from "react-redux";
+import { selectSearch } from "@/redux/tasks/selectors";
+import { updateSearch } from "@/redux/tasks/slice";
 
 export const Wrapper = styled("header")`
   padding: 0 100px;
@@ -19,6 +22,13 @@ export const Buttons = styled("div")`
   gap: 10px;
 `;
 
+export const EndToolsWrapper = styled("div")`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+`;
+
 const Header = () => {
   const {
     isMonthMode,
@@ -31,6 +41,9 @@ const Header = () => {
     monthDate,
     weekDate,
   } = useCalendar();
+
+  const search = useSelector(selectSearch);
+  const dispatch = useDispatch();
 
   const from = weekDate ? weekDate : calculateStartDate(monthDate);
   const to = addDays(from, DAYS_IN_WEEK - 1);
@@ -52,11 +65,20 @@ const Header = () => {
         </p>
       )}
 
-      <Buttons>
-        <button onClick={toWeekMode}>Week</button>
+      <EndToolsWrapper>
+        <input
+          type="text"
+          placeholder="Search tasks"
+          value={search}
+          onChange={e => dispatch(updateSearch(e.target.value))}
+        />
 
-        <button onClick={toMonthMode}>Month</button>
-      </Buttons>
+        <Buttons>
+          <button onClick={toWeekMode}>Week</button>
+
+          <button onClick={toMonthMode}>Month</button>
+        </Buttons>
+      </EndToolsWrapper>
     </Wrapper>
   );
 };
