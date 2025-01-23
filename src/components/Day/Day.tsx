@@ -43,10 +43,10 @@ export const Toolbar = styled("div")`
 interface IProps {
   date: Date;
   tasks: TaskType[];
-  month: number;
+  isCurrentMonth: boolean;
 }
 
-const Day: FC<IProps> = ({ date, tasks, month }) => {
+const Day: FC<IProps> = ({ date, tasks, isCurrentMonth }) => {
   const listRef = useRef<HTMLDivElement>(null);
   const [newTaskId, setNewTaskId] = useState<string | number | null>(null);
   const { holidays } = useHolidaysContext();
@@ -75,7 +75,7 @@ const Day: FC<IProps> = ({ date, tasks, month }) => {
   const cardsNum = tasks.length;
 
   return (
-    <Wrapper $current={month === date.getMonth()}>
+    <Wrapper $current={isCurrentMonth}>
       <Toolbar>
         <div style={{ display: "flex", gap: "10px" }}>
           <span>

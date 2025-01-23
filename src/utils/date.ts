@@ -33,3 +33,11 @@ export const DAYS = [
   { name: "Friday", short: "Fri" },
   { name: "Saturday", short: "Sat" },
 ];
+
+export function addDays(date: Date, days: number) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() + days);
+}
+
+export function addMonths(date: Date, months: number) {
+  return new Date(date.getFullYear(), date.getMonth() + months, date.getDate());
+}
