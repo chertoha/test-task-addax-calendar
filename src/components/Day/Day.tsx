@@ -13,7 +13,7 @@ export const Wrapper = styled("div")<{ $current: boolean }>`
   display: flex;
   flex-direction: column;
 
-  background-color: ${p => (p.$current ? "#d6e8f0" : "#f3eded")};
+  background-color: ${p => (p.$current ? "#87b0c1" : "#c6ccaa")};
   border-radius: 6px;
 
   &:hover button {

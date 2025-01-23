@@ -15,13 +15,17 @@ const App = () => {
           <Trash />
 
           <DayList />
-          <MonthSwitcher />
+          <div style={{ marginBottom: "5px" }}>
+            <MonthSwitcher />
+          </div>
 
           <div style={{ flexGrow: 1, overflow: "hidden" }}>
             <Calendar />
           </div>
 
-          <MonthSwitcher next />
+          <div style={{ marginTop: "5px" }}>
+            <MonthSwitcher next />
+          </div>
         </main>
       </TrashProvider>
     </HolidaysProvider>

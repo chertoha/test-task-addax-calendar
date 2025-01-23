@@ -3,9 +3,11 @@ import { DragEvent, FC, useState } from "react";
 import styled from "styled-components";
 
 export const Wrapper = styled("div")<{ $hovered: boolean }>`
-  background-color: ${p => (p.$hovered ? "#edf3ed" : "#ffffff")};
   height: 30px;
   flex-shrink: 0;
+
+  background-color: ${p => (p.$hovered ? "rgba(89, 181, 239, 0.45)" : "rgba(89, 182, 239, 0.348)")};
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.3);
 
   transition: background-color 250ms ease-in-out;
 `;

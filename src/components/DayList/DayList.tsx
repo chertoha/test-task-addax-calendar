@@ -9,6 +9,8 @@ export const List = styled("ul")`
   grid-template-columns: repeat(7, minmax(0, 1fr));
   /* grid-template-rows: repeat(6, minmax(0, 1fr)); */
 
+  background-color: #b0d9f2;
+
   gap: 5px;
 `;
 

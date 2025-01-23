@@ -11,6 +11,7 @@ import { RootState } from "@/redux/store";
 
 export const Wrapper = styled("div")`
   height: 100%;
+  background-color: #ebeeed;
 `;
 
 export const ListWrapper = styled("ul")<{ $monthmode: boolean }>`
@@ -41,8 +42,6 @@ const Calendar = () => {
   const tasks = useSelector((state: RootState) =>
     selectTasksByDates(state, calendar[0], calendar.length)
   );
-
-  console.log(tasks);
 
   const findDayTasks = (dayDate: Date) =>
     tasks
