@@ -9,7 +9,7 @@ import { useTrashContext } from "@/hooks/useTrashContext";
 
 export const Card = styled("label")`
   display: block;
-  padding: 5px 10px;
+  padding: 7px 10px;
   background-color: #ffffff;
   border-radius: 4px;
   min-height: 24px;
@@ -17,7 +17,7 @@ export const Card = styled("label")`
 
   -webkit-box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.75);
 
   cursor: grab;
 `;

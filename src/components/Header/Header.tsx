@@ -5,11 +5,12 @@ import { calculateStartDate, DAYS_IN_WEEK } from "@/helpers/calculateCalendar";
 import { useDispatch, useSelector } from "react-redux";
 import { selectSearch } from "@/redux/tasks/selectors";
 import { updateSearch } from "@/redux/tasks/slice";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 
 export const Wrapper = styled("header")`
-  padding: 0 100px;
+  padding: 30px 100px;
   width: 100%;
-  height: 100px;
+  /* height: 70px; */
   flex-shrink: 0;
   display: flex;
   justify-content: space-between;
@@ -21,7 +22,7 @@ export const Wrapper = styled("header")`
 export const Buttons = styled("div")`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
 `;
 
 export const EndToolsWrapper = styled("div")`
@@ -29,6 +30,33 @@ export const EndToolsWrapper = styled("div")`
   align-items: center;
   justify-content: center;
   gap: 10px;
+`;
+
+export const TitleDate = styled("p")`
+  font-size: 20px;
+  line-height: 1.5;
+  font-weight: 700;
+`;
+
+export const Button = styled("button")`
+  padding: 7px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #6b8692;
+
+  border: 1px solid #3b6577;
+  border-radius: 4px;
+
+  transition: background-color 300ms ease-in-out, color 300ms ease-in-out,
+    border-color 300ms ease-in-out;
+  &:hover {
+    background-color: #6c99ae;
+    border-color: #6c99ae;
+    color: #f4f2f2;
+  }
 `;
 
 const Header = () => {
@@ -52,19 +80,23 @@ const Header = () => {
   return (
     <Wrapper>
       <Buttons>
-        <button onClick={isMonthMode ? prevMonth : prevWeek}>{"<"}</button>
+        <Button onClick={isMonthMode ? prevMonth : prevWeek}>
+          <FaChevronUp />
+        </Button>
 
-        <button onClick={isMonthMode ? nextMonth : nextWeek}>{">"}</button>
+        <Button onClick={isMonthMode ? nextMonth : nextWeek}>
+          <FaChevronDown />
+        </Button>
       </Buttons>
 
       {isMonthMode ? (
-        <p>
+        <TitleDate>
           {MONTHS[monthDate.getMonth()].name} {monthDate.getFullYear()}
-        </p>
+        </TitleDate>
       ) : (
-        <p>
+        <TitleDate>
           {dateToShortDayMonthString(from)} - {dateToShortDayMonthString(to)}
-        </p>
+        </TitleDate>
       )}
 
       <EndToolsWrapper>
