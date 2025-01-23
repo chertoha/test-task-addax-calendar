@@ -12,6 +12,7 @@ export const Wrapper = styled("div")<{ $current: boolean; $today: boolean }>`
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   background-color: ${p => (p.$current ? "#87b0c1" : "#c6ccaa")};
   border-radius: 6px;
@@ -21,7 +22,9 @@ export const Wrapper = styled("div")<{ $current: boolean; $today: boolean }>`
   border-style: ${p => p.$today && "solid"};
 
   &:hover button {
-    display: block;
+    /* display: flex; */
+    opacity: 1;
+    transform: translate(0, 0);
   }
 `;
 

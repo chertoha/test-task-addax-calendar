@@ -17,7 +17,8 @@ export const Wrapper = styled("header")`
   justify-content: space-between;
   align-items: center;
 
-  background-color: #b0d9f2;
+  /* background-color: #b0d9f2; */
+  background-color: #c5c0b2;
 `;
 
 export const Buttons = styled("div")`
@@ -88,7 +89,6 @@ export const SearchWrapper = styled("div")`
   align-items: center;
   justify-content: center;
   color: #054867;
-  /* gap: 5px; */
 `;
 
 export const SearchField = styled("input")`
@@ -96,6 +96,7 @@ export const SearchField = styled("input")`
   width: 200px;
   border-bottom: 1px solid #617c88;
   outline: none;
+  font-size: 16px;
 
   &:focus-visible {
     border-color: #054867;
@@ -158,7 +159,7 @@ const Header = () => {
 
       <EndToolsWrapper>
         <SearchWrapper>
-          <IoMdSearch size={18} />
+          <IoMdSearch size={20} />
           <SearchField
             type="text"
             placeholder="Search tasks..."

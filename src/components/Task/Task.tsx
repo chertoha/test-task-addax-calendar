@@ -6,14 +6,21 @@ import styled from "styled-components";
 import { TaskType } from "../../types/entities";
 import { updateTask } from "@/redux/tasks/slice";
 import { useTrashContext } from "@/hooks/useTrashContext";
+import { useDebouncedCallback } from "use-debounce";
 
 export const Card = styled("label")`
-  display: block;
   padding: 7px 10px;
-  background-color: #ffffff;
-  border-radius: 4px;
   min-height: 24px;
+
+  display: block;
+
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  color: #232628;
   word-wrap: break-word;
+
+  background-color: #f5f8f9;
+  border-radius: 4px;
 
   -webkit-box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.75);
@@ -27,6 +34,7 @@ export const Area = styled("textarea")`
   width: 100%;
   outline: none;
   border: none;
+  background-color: #f5f8f9;
 
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -50,11 +58,23 @@ const Task: FC<IProps> = ({ data, isNewTask }) => {
 
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  useEffect(() => {
+  const taskUpdate = (value: string) => {
     if (data.value !== value) {
       dispatch(updateTask({ ...data, value }));
     }
-  }, [value, dispatch, data]);
+  };
+
+  const debouncedTaskUpdate = useDebouncedCallback(taskUpdate, 500);
+
+  useEffect(() => {
+    debouncedTaskUpdate(value);
+  }, [value, debouncedTaskUpdate]);
+
+  // useEffect(() => {
+  //   if (data.value !== value) {
+  //     dispatch(updateTask({ ...data, value }));
+  //   }
+  // }, [value, dispatch, data]);
 
   useEffect(() => {
     if (inputRef.current && isEditMode) {

@@ -13,11 +13,7 @@ type InitialState = {
   isMonthMode: boolean;
 };
 
-// const today = new Date();
-// const startMonthDate = new Date(today.getFullYear(), today.getMonth(), 1);
-
 const initialState: InitialState = {
-  // monthDate: startMonthDate.toISOString(),
   monthDate: getStartTodayMonthDate().toISOString(),
   weekDate: null,
   isMonthMode: true,

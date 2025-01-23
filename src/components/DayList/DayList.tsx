@@ -3,15 +3,14 @@ import styled from "styled-components";
 
 export const List = styled("ul")`
   display: grid;
-
-  /* height: 100%; */
-
   grid-template-columns: repeat(7, minmax(0, 1fr));
-  /* grid-template-rows: repeat(6, minmax(0, 1fr)); */
-
-  background-color: #b0d9f2;
-
+  /* background-color: #b0d9f2; */
+  background-color: #c5c0b2;
   gap: 5px;
+
+  font-size: 16px;
+  color: #373737;
+  font-weight: 700;
 `;
 
 export const Item = styled("li")`
