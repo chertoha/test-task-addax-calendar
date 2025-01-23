@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { addDays, dateToShortDayMonthString, MONTHS } from "@/utils/date";
 import useCalendar from "@/hooks/useCalendar";
 import { calculateStartDate, DAYS_IN_WEEK } from "@/helpers/calculateCalendar";
@@ -36,6 +36,7 @@ export const TitleDate = styled("p")`
   font-size: 20px;
   line-height: 1.5;
   font-weight: 700;
+  color: #343434;
 `;
 
 export const Button = styled("button")`
@@ -45,7 +46,7 @@ export const Button = styled("button")`
   align-items: center;
   justify-content: center;
 
-  color: #6b8692;
+  color: #3c4d54;
 
   border: 1px solid #3b6577;
   border-radius: 4px;
@@ -57,6 +58,21 @@ export const Button = styled("button")`
     border-color: #6c99ae;
     color: #f4f2f2;
   }
+`;
+
+export const WeekMonthButton = styled(Button)<{ $active: boolean }>`
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #272727;
+  font-weight: 700;
+
+  ${p =>
+    p.$active &&
+    css`
+      background-color: #6c99ae;
+      border-color: #6c99ae;
+      color: #f4f2f2;
+    `}
 `;
 
 const Header = () => {
@@ -77,6 +93,7 @@ const Header = () => {
 
   const from = weekDate ? weekDate : calculateStartDate(monthDate);
   const to = addDays(from, DAYS_IN_WEEK - 1);
+
   return (
     <Wrapper>
       <Buttons>
@@ -108,9 +125,19 @@ const Header = () => {
         />
 
         <Buttons>
-          <button onClick={toWeekMode}>Week</button>
+          <WeekMonthButton
+            $active={!isMonthMode}
+            onClick={toWeekMode}
+          >
+            Week
+          </WeekMonthButton>
 
-          <button onClick={toMonthMode}>Month</button>
+          <WeekMonthButton
+            $active={isMonthMode}
+            onClick={toMonthMode}
+          >
+            Month
+          </WeekMonthButton>
         </Buttons>
       </EndToolsWrapper>
     </Wrapper>
