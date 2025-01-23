@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useSelector } from "react-redux";
 
 import Day from "../Day";
@@ -13,21 +13,17 @@ export const Wrapper = styled("div")`
   height: 100%;
 `;
 
-export const MonthList = styled("ul")`
-  display: grid;
-
-  height: 100%;
-
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  grid-template-rows: repeat(6, minmax(0, 1fr));
-
-  gap: 5px;
-`;
-
-export const WeekList = styled("ul")`
+export const ListWrapper = styled("ul")<{ $monthmode: boolean }>`
   display: grid;
   height: 100%;
   grid-template-columns: repeat(7, minmax(0, 1fr));
+
+  ${p =>
+    p.$monthmode &&
+    css`
+      grid-template-rows: repeat(6, minmax(0, 1fr));
+    `}
+
   gap: 5px;
 `;
 
@@ -56,31 +52,17 @@ const Calendar = () => {
   return (
     <>
       <Wrapper>
-        {isMonthMode ? (
-          <MonthList>
-            {calendar.map(date => (
-              <Item key={date.toString()}>
-                <Day
-                  date={date}
-                  tasks={findDayTasks(date)}
-                  isCurrentMonth={monthDate.getMonth() === date.getMonth()}
-                />
-              </Item>
-            ))}
-          </MonthList>
-        ) : (
-          <WeekList>
-            {calendar.map(date => (
-              <Item key={date.toString()}>
-                <Day
-                  date={date}
-                  tasks={findDayTasks(date)}
-                  isCurrentMonth={monthDate.getMonth() === date.getMonth()}
-                />
-              </Item>
-            ))}
-          </WeekList>
-        )}
+        <ListWrapper $monthmode={isMonthMode}>
+          {calendar.map(date => (
+            <Item key={date.toString()}>
+              <Day
+                date={date}
+                tasks={findDayTasks(date)}
+                isCurrentMonth={monthDate.getMonth() === date.getMonth()}
+              />
+            </Item>
+          ))}
+        </ListWrapper>
       </Wrapper>
     </>
   );
