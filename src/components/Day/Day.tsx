@@ -47,6 +47,30 @@ export const Toolbar = styled("div")`
   align-items: center;
 `;
 
+export const HolidayText = styled("p")`
+  font-size: 12px;
+  color: #3c5a67;
+`;
+
+export const DateTextWrapper = styled("span")`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+`;
+
+export const DateText = styled("span")`
+  font-size: 15px;
+  font-weight: 700;
+  color: #2d2b2b;
+`;
+
+export const ToolbarCardsText = styled("span")`
+  font-size: 12px;
+  font-weight: 700;
+  color: #647c7c;
+`;
+
 interface IProps {
   date: Date;
   tasks: TaskType[];
@@ -87,18 +111,18 @@ const Day: FC<IProps> = ({ date, tasks, isCurrentMonth }) => {
       $today={areDatesEqual(new Date(), new Date(date))}
     >
       <Toolbar>
-        <div style={{ display: "flex", gap: "10px" }}>
-          <span>
+        <DateTextWrapper>
+          <DateText>
             {shouldShowMonthName && MONTHS[date.getMonth()].short} {date.getDate()}
-          </span>
+          </DateText>
 
           {!!cardsNum && (
-            <span>
+            <ToolbarCardsText>
               {cardsNum}
               {cardsNum === 1 ? " card" : " cards"}{" "}
-            </span>
+            </ToolbarCardsText>
           )}
-        </div>
+        </DateTextWrapper>
 
         <AddTaskButton
           date={date}
@@ -108,7 +132,7 @@ const Day: FC<IProps> = ({ date, tasks, isCurrentMonth }) => {
       </Toolbar>
 
       <TaskListContainer ref={listRef}>
-        {holiday && <p>{holiday.name}</p>}
+        {holiday && <HolidayText>{holiday.name}</HolidayText>}
         <TaskList
           list={tasks}
           date={date}

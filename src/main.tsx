@@ -6,6 +6,8 @@ import GlobalStyle from "./styles/globalStyles";
 import { Provider } from "react-redux";
 import { persistor, store } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
+import HolidaysProvider from "./components/HolidaysProvider";
+import TrashProvider from "./components/TrashProvider";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -15,7 +17,11 @@ createRoot(document.getElementById("root")!).render(
         persistor={persistor}
       >
         <GlobalStyle />
-        <App />
+        <HolidaysProvider>
+          <TrashProvider>
+            <App />
+          </TrashProvider>
+        </HolidaysProvider>
       </PersistGate>
     </Provider>
   </StrictMode>
