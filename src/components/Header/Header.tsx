@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectSearch } from "@/redux/tasks/selectors";
 import { updateSearch } from "@/redux/tasks/slice";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
+import { IoMdSearch } from "react-icons/io";
 
 export const Wrapper = styled("header")`
   padding: 30px 100px;
@@ -29,7 +30,7 @@ export const EndToolsWrapper = styled("div")`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 200px;
 `;
 
 export const TitleDate = styled("p")`
@@ -63,7 +64,7 @@ export const Button = styled("button")`
 export const WeekMonthButton = styled(Button)<{ $active: boolean }>`
   padding-left: 10px;
   padding-right: 10px;
-  color: #272727;
+  color: #373535;
   font-weight: 700;
 
   ${p =>
@@ -73,6 +74,33 @@ export const WeekMonthButton = styled(Button)<{ $active: boolean }>`
       border-color: #6c99ae;
       color: #f4f2f2;
     `}
+`;
+
+export const SearchWrapper = styled("div")`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #054867;
+  /* gap: 5px; */
+`;
+
+export const SearchField = styled("input")`
+  padding: 5px 5px;
+  width: 200px;
+  border-bottom: 1px solid #617c88;
+  outline: none;
+
+  &:focus-visible {
+    border-color: #054867;
+  }
+
+  &:focus-visible::placeholder {
+    color: #054867;
+  }
+
+  &::placeholder {
+    color: #617c88;
+  }
 `;
 
 const Header = () => {
@@ -117,12 +145,15 @@ const Header = () => {
       )}
 
       <EndToolsWrapper>
-        <input
-          type="text"
-          placeholder="Search tasks"
-          value={search}
-          onChange={e => dispatch(updateSearch(e.target.value))}
-        />
+        <SearchWrapper>
+          <IoMdSearch size={18} />
+          <SearchField
+            type="text"
+            placeholder="Search tasks..."
+            value={search}
+            onChange={e => dispatch(updateSearch(e.target.value))}
+          />
+        </SearchWrapper>
 
         <Buttons>
           <WeekMonthButton
