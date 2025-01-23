@@ -1,10 +1,12 @@
-import { calculateMonthCalendar, calculateWeekCalendar } from "../../helpers/calculateCalendar";
 import styled from "styled-components";
-import Day from "../Day";
 import { useSelector } from "react-redux";
-import { selectTasks, selectTasksByDates } from "@/redux/tasks/selectors";
-import { areDatesEqual } from "@/utils/date";
+
+import Day from "../Day";
 import useCalendar from "@/hooks/useCalendar";
+
+import { calculateMonthCalendar, calculateWeekCalendar } from "../../helpers/calculateCalendar";
+import { selectTasksByDates } from "@/redux/tasks/selectors";
+import { areDatesEqual } from "@/utils/date";
 import { RootState } from "@/redux/store";
 
 export const Wrapper = styled("div")`
