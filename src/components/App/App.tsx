@@ -14,9 +14,8 @@ const App = () => {
           <Header />
           <Trash />
 
-          <MonthSwitcher />
-
           <DayList />
+          <MonthSwitcher />
 
           <div style={{ flexGrow: 1, overflow: "hidden" }}>
             <Calendar />

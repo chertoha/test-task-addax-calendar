@@ -5,6 +5,7 @@ import styled from "styled-components";
 export const Wrapper = styled("div")<{ $hovered: boolean }>`
   background-color: ${p => (p.$hovered ? "#edf3ed" : "#ffffff")};
   height: 30px;
+  flex-shrink: 0;
 
   transition: background-color 250ms ease-in-out;
 `;
