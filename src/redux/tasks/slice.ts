@@ -1,62 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { TaskType } from "../../types/entities";
+import storage from "redux-persist/lib/storage";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { persistReducer } from "redux-persist";
+import { createSlice } from "@reduxjs/toolkit";
+
+import { TaskType } from "../../types/entities";
+import { initialTasks } from "@/utils/initialTasks";
 
 type InitialState = {
   items: TaskType[];
 };
 
 const initialState: InitialState = {
-  items: [
-    {
-      id: 1,
-      value: "task 1",
-      date: new Date().toISOString(),
-      order: 1,
-    },
-
-    {
-      id: 2,
-      value: "task 2",
-      date: new Date(2025, 0, 2).toISOString(),
-      order: 1,
-    },
-
-    {
-      id: 3,
-      value: "task 3",
-      date: new Date(2025, 0, 20).toISOString(),
-      order: 1,
-    },
-
-    {
-      id: 4,
-      value: "task 4",
-      date: new Date(2025, 0, 2).toISOString(),
-      order: 2,
-    },
-
-    {
-      id: 5,
-      value: "task 5",
-      date: new Date(2025, 0, 2).toISOString(),
-      order: 3,
-    },
-
-    {
-      id: 6,
-      value: "task 6",
-      date: new Date(2025, 0, 2).toISOString(),
-      order: 4,
-    },
-
-    {
-      id: 7,
-      value: "task 7",
-      date: new Date(2025, 0, 2).toISOString(),
-      order: 5,
-    },
-  ],
+  items: initialTasks,
 };
 
 const tasksSlice = createSlice({
@@ -93,6 +48,14 @@ const tasksSlice = createSlice({
     },
   },
 });
+
+const tasksPersistConfig = {
+  key: "tasks",
+  storage,
+  whitelist: ["items"],
+};
+
+export const persistedTasksReducer = persistReducer(tasksPersistConfig, tasksSlice.reducer);
 
 export const { addTask, updateTaskDate, updateBunch, updateTask, removeTask } = tasksSlice.actions;
 
