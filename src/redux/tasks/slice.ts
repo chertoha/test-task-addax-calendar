@@ -8,10 +8,12 @@ import { initialTasks } from "@/utils/initialTasks";
 
 type InitialState = {
   items: TaskType[];
+  search: string;
 };
 
 const initialState: InitialState = {
   items: initialTasks,
+  search: "",
 };
 
 const tasksSlice = createSlice({
@@ -46,6 +48,10 @@ const tasksSlice = createSlice({
     removeTask: (state, { payload }: PayloadAction<number | string>) => {
       state.items = state.items.filter(({ id }) => id !== payload);
     },
+
+    updateSearch: (state, { payload }: PayloadAction<string>) => {
+      state.search = payload;
+    },
   },
 });
 
@@ -57,6 +63,7 @@ const tasksPersistConfig = {
 
 export const persistedTasksReducer = persistReducer(tasksPersistConfig, tasksSlice.reducer);
 
-export const { addTask, updateTaskDate, updateBunch, updateTask, removeTask } = tasksSlice.actions;
+export const { addTask, updateTaskDate, updateBunch, updateTask, removeTask, updateSearch } =
+  tasksSlice.actions;
 
 export default tasksSlice;

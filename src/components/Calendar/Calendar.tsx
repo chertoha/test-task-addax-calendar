@@ -2,9 +2,10 @@ import { calculateMonthCalendar, calculateWeekCalendar } from "../../helpers/cal
 import styled from "styled-components";
 import Day from "../Day";
 import { useSelector } from "react-redux";
-import { selectTasks } from "@/redux/tasks/selectors";
+import { selectTasks, selectTasksByDates } from "@/redux/tasks/selectors";
 import { areDatesEqual } from "@/utils/date";
 import useCalendar from "@/hooks/useCalendar";
+import { RootState } from "@/redux/store";
 
 export const Wrapper = styled("div")`
   height: 100%;
@@ -33,30 +34,22 @@ export const Item = styled("li")`
 `;
 
 const Calendar = () => {
-  const tasks = useSelector(selectTasks);
-
-  // const offset = useSelector(selectOffset);
   const { monthDate, weekDate, isMonthMode } = useCalendar();
 
-  let calendar: Date[];
+  const calendar = isMonthMode
+    ? calculateMonthCalendar(monthDate)
+    : calculateWeekCalendar(monthDate, weekDate);
 
-  if (isMonthMode) {
-    calendar = calculateMonthCalendar(monthDate);
-  } else {
-    calendar = calculateWeekCalendar(monthDate, weekDate);
-  }
+  const tasks = useSelector((state: RootState) =>
+    selectTasksByDates(state, calendar[0], calendar.length)
+  );
+
+  console.log(tasks);
 
   const findDayTasks = (dayDate: Date) =>
     tasks
       .filter(({ date }) => areDatesEqual(dayDate, new Date(date)))
       .sort((a, b) => a.order - b.order);
-
-  // const month = getOffsetMonth(offset);
-
-  //Temporary!!!!!!
-  // const month = monthDate;
-
-  // calculateWeekCalendar(1, 1);
 
   return (
     <>
