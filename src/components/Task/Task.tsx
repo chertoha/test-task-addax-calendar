@@ -21,6 +21,7 @@ export const Card = styled("label")`
 
   background-color: #f5f8f9;
   border-radius: 4px;
+  border-top: 4px solid #31708d;
 
   -webkit-box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.75);

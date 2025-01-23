@@ -22,7 +22,6 @@ export const Wrapper = styled("div")<{ $current: boolean; $today: boolean }>`
   border-style: ${p => p.$today && "solid"};
 
   &:hover button {
-    /* display: flex; */
     opacity: 1;
     transform: translate(0, 0);
   }
@@ -31,7 +30,7 @@ export const Wrapper = styled("div")<{ $current: boolean; $today: boolean }>`
 export const TaskListContainer = styled("div")`
   height: 100%;
   overflow: auto;
-
+  scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
 
