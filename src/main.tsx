@@ -4,13 +4,19 @@ import "./styles/index.css";
 import App from "./components/App";
 import GlobalStyle from "./styles/globalStyles";
 import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import { persistor, store } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
-      <GlobalStyle />
-      <App />
+      <PersistGate
+        loading={null}
+        persistor={persistor}
+      >
+        <GlobalStyle />
+        <App />
+      </PersistGate>
     </Provider>
   </StrictMode>
 );
