@@ -9,7 +9,7 @@ export const calculateMonthCalendar = (offset: number) => {
   return Array.from(Array(42)).map((_, i, arr) => (arr[i] = addDays(startDate, i)));
 };
 
-export const calculateWeekCalendar = (monthOffset: number, weekOffset: number) => {};
+export const calculateWeekCalendar = (_monthOffset: number, _weekOffset: number) => {};
 
 function addDays(date: Date, days: number) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate() + days);
