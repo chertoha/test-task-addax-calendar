@@ -1,4 +1,4 @@
-import useOffset from "@/hooks/useOffset";
+import useCalendar from "@/hooks/useCalendar";
 import { DragEvent, FC, useState } from "react";
 import styled from "styled-components";
 
@@ -15,7 +15,7 @@ interface IProps {
 }
 
 const MonthSwitcher: FC<IProps> = ({ next = false }) => {
-  const { decreaseOffset, increaseOffset } = useOffset();
+  const { isMonthMode, nextMonth, nextWeek, prevWeek, prevMonth } = useCalendar();
 
   const [isAvailable, setIsAvailable] = useState<boolean>(true);
   const [isHovered, setIsHovered] = useState<boolean>(false);
@@ -27,11 +27,15 @@ const MonthSwitcher: FC<IProps> = ({ next = false }) => {
     if (!isAvailable) return;
 
     setIsAvailable(false);
+
+    const increaseHandler = isMonthMode ? nextMonth : nextWeek;
+    const decreaseHandler = isMonthMode ? prevMonth : prevWeek;
+
     setTimeout(() => {
       if (next) {
-        increaseOffset();
+        increaseHandler();
       } else {
-        decreaseOffset();
+        decreaseHandler();
       }
 
       setTimeout(() => {

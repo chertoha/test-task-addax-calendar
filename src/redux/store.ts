@@ -1,13 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
+
 import tasksSlice from "./tasks/slice";
-import { holidaysApi } from "./holidays/holidaysApi";
-import offsetSlice from "./offset/slice";
 import calendarSlice from "./calendar/slice";
+import { holidaysApi } from "./holidays/holidaysApi";
 
 export const store = configureStore({
   reducer: {
     [tasksSlice.reducerPath]: tasksSlice.reducer,
-    [offsetSlice.reducerPath]: offsetSlice.reducer,
     [calendarSlice.reducerPath]: calendarSlice.reducer,
     [holidaysApi.reducerPath]: holidaysApi.reducer,
   },

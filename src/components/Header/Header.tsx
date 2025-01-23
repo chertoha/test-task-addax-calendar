@@ -20,7 +20,6 @@ export const Buttons = styled("div")`
 `;
 
 const Header = () => {
-  // const { offset, decreaseOffset, increaseOffset } = useOffset();
   const {
     isMonthMode,
     nextWeek,
