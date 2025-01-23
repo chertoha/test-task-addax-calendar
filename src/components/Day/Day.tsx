@@ -7,7 +7,7 @@ import AddTaskButton from "../AddTaskButton";
 import { useHolidaysContext } from "@/hooks/useHolidaysContext";
 import { areDatesEqual, isLastDayOfMonth, MONTHS } from "@/utils/date";
 
-export const Wrapper = styled("div")<{ $current: boolean }>`
+export const Wrapper = styled("div")<{ $current: boolean; $today: boolean }>`
   padding: 10px;
   height: 100%;
   display: flex;
@@ -15,6 +15,10 @@ export const Wrapper = styled("div")<{ $current: boolean }>`
 
   background-color: ${p => (p.$current ? "#87b0c1" : "#c6ccaa")};
   border-radius: 6px;
+
+  border-width: 3px;
+  border-color: #1c5165;
+  border-style: ${p => p.$today && "solid"};
 
   &:hover button {
     display: block;
@@ -75,7 +79,10 @@ const Day: FC<IProps> = ({ date, tasks, isCurrentMonth }) => {
   const cardsNum = tasks.length;
 
   return (
-    <Wrapper $current={isCurrentMonth}>
+    <Wrapper
+      $current={isCurrentMonth}
+      $today={areDatesEqual(new Date(), new Date(date))}
+    >
       <Toolbar>
         <div style={{ display: "flex", gap: "10px" }}>
           <span>

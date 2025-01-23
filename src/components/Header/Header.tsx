@@ -26,6 +26,13 @@ export const Buttons = styled("div")`
   gap: 5px;
 `;
 
+export const StartToolsWrapper = styled("div")`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+`;
+
 export const EndToolsWrapper = styled("div")`
   display: flex;
   align-items: center;
@@ -114,6 +121,7 @@ const Header = () => {
     prevMonth,
     monthDate,
     weekDate,
+    resetCalendar,
   } = useCalendar();
 
   const search = useSelector(selectSearch);
@@ -124,15 +132,19 @@ const Header = () => {
 
   return (
     <Wrapper>
-      <Buttons>
-        <Button onClick={isMonthMode ? prevMonth : prevWeek}>
-          <FaChevronUp />
-        </Button>
+      <StartToolsWrapper>
+        <Buttons>
+          <Button onClick={isMonthMode ? prevMonth : prevWeek}>
+            <FaChevronUp />
+          </Button>
 
-        <Button onClick={isMonthMode ? nextMonth : nextWeek}>
-          <FaChevronDown />
-        </Button>
-      </Buttons>
+          <Button onClick={isMonthMode ? nextMonth : nextWeek}>
+            <FaChevronDown />
+          </Button>
+        </Buttons>
+
+        <Button onClick={resetCalendar}>Today</Button>
+      </StartToolsWrapper>
 
       {isMonthMode ? (
         <TitleDate>
