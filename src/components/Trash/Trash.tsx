@@ -7,8 +7,8 @@ import { removeTask } from "@/redux/tasks/slice";
 
 const Wrapper = styled("div")`
   position: fixed;
-  top: 40px;
-  right: 350px;
+  bottom: 50px;
+  right: 30px;
 
   width: 50px;
   height: 50px;

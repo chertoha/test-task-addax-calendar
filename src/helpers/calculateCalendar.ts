@@ -1,6 +1,6 @@
-export const calculateCalendar = (offset: number) => {
-  const today = new Date();
-  const date = addMonths(today, offset);
+export const calculateMonthCalendar = (offset: number) => {
+  const startTodayMonthDate = getCurrentMonthStartDate();
+  const date = addMonths(startTodayMonthDate, offset);
 
   const startMonthDate = new Date(date.getFullYear(), date.getMonth(), 1);
   const startMonthWeekday = startMonthDate.getDay();
@@ -9,6 +9,8 @@ export const calculateCalendar = (offset: number) => {
   return Array.from(Array(42)).map((_, i, arr) => (arr[i] = addDays(startDate, i)));
 };
 
+export const calculateWeekCalendar = (_monthOffset: number, _weekOffset: number) => {};
+
 function addDays(date: Date, days: number) {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate() + days);
 }
@@ -16,3 +18,15 @@ function addDays(date: Date, days: number) {
 function addMonths(date: Date, months: number) {
   return new Date(date.getFullYear(), date.getMonth() + months, date.getDate());
 }
+
+function getCurrentMonthStartDate() {
+  const today = new Date();
+  return new Date(today.getFullYear(), today.getMonth(), 1);
+}
+
+// wrong !!!!
+export const getOffsetMonth = (offset: number) =>
+  addMonths(getCurrentMonthStartDate(), offset).getMonth();
+
+export const getOffsetYear = (offset: number) =>
+  addMonths(getCurrentMonthStartDate(), offset).getFullYear();

@@ -5,15 +5,20 @@ import TaskList from "../TaskList";
 import { TaskType } from "@/types/entities";
 import AddTaskButton from "../AddTaskButton";
 import { useHolidaysContext } from "@/hooks/useHolidaysContext";
-import { areDatesEqual } from "@/utils/date";
+import { areDatesEqual, isLastDayOfMonth, MONTHS } from "@/utils/date";
 
-export const Wrapper = styled("div")`
+export const Wrapper = styled("div")<{ $current: boolean }>`
   padding: 10px;
+  height: 100%;
   display: flex;
   flex-direction: column;
 
-  background-color: #e3e5e6;
-  height: 100%;
+  background-color: ${p => (p.$current ? "#d6e8f0" : "#f3eded")};
+  border-radius: 6px;
+
+  &:hover button {
+    display: block;
+  }
 `;
 
 export const TaskListContainer = styled("div")`
@@ -38,9 +43,10 @@ export const Toolbar = styled("div")`
 interface IProps {
   date: Date;
   tasks: TaskType[];
+  month: number;
 }
 
-const Day: FC<IProps> = ({ date, tasks }) => {
+const Day: FC<IProps> = ({ date, tasks, month }) => {
   const listRef = useRef<HTMLDivElement>(null);
   const [newTaskId, setNewTaskId] = useState<string | number | null>(null);
   const { holidays } = useHolidaysContext();
@@ -65,10 +71,24 @@ const Day: FC<IProps> = ({ date, tasks }) => {
     areDatesEqual(new Date(date), new Date(holidayDate))
   );
 
+  const shouldShowMonthName = isLastDayOfMonth(date) || date.getDate() === 1;
+  const cardsNum = tasks.length;
+
   return (
-    <Wrapper>
+    <Wrapper $current={month === date.getMonth()}>
       <Toolbar>
-        <span>{date.getDate()}</span>
+        <div style={{ display: "flex", gap: "10px" }}>
+          <span>
+            {shouldShowMonthName && MONTHS[date.getMonth()].short} {date.getDate()}
+          </span>
+
+          {!!cardsNum && (
+            <span>
+              {cardsNum}
+              {cardsNum === 1 ? " card" : " cards"}{" "}
+            </span>
+          )}
+        </div>
 
         <AddTaskButton
           date={date}

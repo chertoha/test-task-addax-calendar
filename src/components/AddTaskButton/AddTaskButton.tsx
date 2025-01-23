@@ -5,8 +5,14 @@ import { FC } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
+export const ButtonWrapper = styled("div")`
+  width: 24px;
+  height: 24px;
+`;
+
 export const Button = styled("button")`
   font-size: 20px;
+  display: none;
 `;
 
 interface IProps {
@@ -32,13 +38,15 @@ const AddTaskButton: FC<IProps> = ({ date, lastOrderValue, showNewTask }) => {
   };
 
   return (
-    <Button
-      type="button"
-      aria-label="Add task"
-      onClick={onClickHandler}
-    >
-      +
-    </Button>
+    <ButtonWrapper>
+      <Button
+        type="button"
+        aria-label="Add task"
+        onClick={onClickHandler}
+      >
+        +
+      </Button>
+    </ButtonWrapper>
   );
 };
 

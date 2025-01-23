@@ -11,16 +11,15 @@ export const EmptyItem = styled("li")<{ $hovered: boolean }>`
     p.$hovered &&
     css`
       min-height: 25px;
-      background-color: rgba(192, 208, 224, 0.3);
+      background-color: rgba(255, 255, 255, 0.3);
       border-radius: 5px;
     `}
 
   transition: min-height 0.3s ease;
 
   &:last-child {
-    height: 100%;
+    flex-grow: 1;
     min-height: 30px;
-
     border-radius: 20px;
   }
 `;
