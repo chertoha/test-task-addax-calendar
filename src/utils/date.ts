@@ -41,3 +41,7 @@ export function addDays(date: Date, days: number) {
 export function addMonths(date: Date, months: number) {
   return new Date(date.getFullYear(), date.getMonth() + months, date.getDate());
 }
+
+export function dateToShortDayMonthString(date: Date) {
+  return `${date.getDate()} ${MONTHS[date.getMonth()].short}`;
+}

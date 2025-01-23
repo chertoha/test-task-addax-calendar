@@ -1,8 +1,7 @@
-import useOffset from "@/hooks/useOffset";
-import { getOffsetMonth, getOffsetYear } from "@/helpers/calculateCalendar";
 import styled from "styled-components";
-import { MONTHS } from "@/utils/date";
+import { addDays, dateToShortDayMonthString, MONTHS } from "@/utils/date";
 import useCalendar from "@/hooks/useCalendar";
+import { calculateStartDate, DAYS_IN_WEEK } from "@/helpers/calculateCalendar";
 
 export const Wrapper = styled("header")`
   padding: 0 100px;
@@ -22,9 +21,20 @@ export const Buttons = styled("div")`
 
 const Header = () => {
   // const { offset, decreaseOffset, increaseOffset } = useOffset();
-  const { isMonthMode, nextWeek, prevWeek, toMonthMode, toWeekMode, nextMonth, prevMonth } =
-    useCalendar();
+  const {
+    isMonthMode,
+    nextWeek,
+    prevWeek,
+    toMonthMode,
+    toWeekMode,
+    nextMonth,
+    prevMonth,
+    monthDate,
+    weekDate,
+  } = useCalendar();
 
+  const from = weekDate ? weekDate : calculateStartDate(monthDate);
+  const to = addDays(from, DAYS_IN_WEEK - 1);
   return (
     <Wrapper>
       <Buttons>
@@ -33,11 +43,15 @@ const Header = () => {
         <button onClick={isMonthMode ? nextMonth : nextWeek}>{">"}</button>
       </Buttons>
 
-      {/* <p>{new Date(2025, getOffsetMonth(offset), 1).toDateString()}</p> */}
-      <p>
-        {/* {MONTHS[getOffsetMonth(offset)].name} {getOffsetYear(offset)} */}
-        DATE
-      </p>
+      {isMonthMode ? (
+        <p>
+          {MONTHS[monthDate.getMonth()].name} {monthDate.getFullYear()}
+        </p>
+      ) : (
+        <p>
+          {dateToShortDayMonthString(from)} - {dateToShortDayMonthString(to)}
+        </p>
+      )}
 
       <Buttons>
         <button onClick={toWeekMode}>Week</button>
