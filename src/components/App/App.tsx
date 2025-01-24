@@ -1,30 +1,37 @@
 import Calendar from "../Calendar";
 import Trash from "../Trash";
-import TrashProvider from "../TrashProvider";
-import HolidaysProvider from "../HolidaysProvider";
 import Header from "../Header";
 import MonthSwitcher from "../MonthSwitcher";
 import DayList from "../DayList";
 
+import {
+  BottomSwitcherWrapper,
+  CalendarWrapper,
+  MainContainer,
+  TopSwitcherWrapper,
+} from "./App.styled";
+
 const App = () => {
   return (
-    <HolidaysProvider>
-      <TrashProvider>
-        <main style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-          <Header />
-          <Trash />
+    <MainContainer>
+      <Header />
 
-          <DayList />
-          <MonthSwitcher />
+      <Trash />
 
-          <div style={{ flexGrow: 1, overflow: "hidden" }}>
-            <Calendar />
-          </div>
+      <DayList />
 
-          <MonthSwitcher next />
-        </main>
-      </TrashProvider>
-    </HolidaysProvider>
+      <TopSwitcherWrapper>
+        <MonthSwitcher />
+      </TopSwitcherWrapper>
+
+      <CalendarWrapper>
+        <Calendar />
+      </CalendarWrapper>
+
+      <BottomSwitcherWrapper>
+        <MonthSwitcher next />
+      </BottomSwitcherWrapper>
+    </MainContainer>
   );
 };
 

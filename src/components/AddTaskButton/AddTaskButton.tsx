@@ -1,19 +1,11 @@
-import { addTask } from "@/redux/tasks/slice";
-import { TaskType } from "@/types/entities";
-import { nanoid } from "@reduxjs/toolkit";
 import { FC } from "react";
 import { useDispatch } from "react-redux";
-import styled from "styled-components";
+import { nanoid } from "@reduxjs/toolkit";
+import { IoMdAdd } from "react-icons/io";
 
-export const ButtonWrapper = styled("div")`
-  width: 24px;
-  height: 24px;
-`;
-
-export const Button = styled("button")`
-  font-size: 20px;
-  display: none;
-`;
+import { addTask } from "@/redux/tasks/slice";
+import { TaskType } from "@/types/entities";
+import { Button, ButtonWrapper } from "./AddTaskButton.styled";
 
 interface IProps {
   date: Date;
@@ -44,7 +36,7 @@ const AddTaskButton: FC<IProps> = ({ date, lastOrderValue, showNewTask }) => {
         aria-label="Add task"
         onClick={onClickHandler}
       >
-        +
+        <IoMdAdd size={20} />
       </Button>
     </ButtonWrapper>
   );

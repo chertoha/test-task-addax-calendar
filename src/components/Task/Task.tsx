@@ -1,40 +1,11 @@
 import { DragEvent, FC, KeyboardEvent, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-
-import styled from "styled-components";
+import { useDebouncedCallback } from "use-debounce";
 
 import { TaskType } from "../../types/entities";
 import { updateTask } from "@/redux/tasks/slice";
 import { useTrashContext } from "@/hooks/useTrashContext";
-
-export const Card = styled("label")`
-  display: block;
-  padding: 5px 10px;
-  background-color: #ffffff;
-  border-radius: 4px;
-  min-height: 24px;
-  word-wrap: break-word;
-
-  -webkit-box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.75);
-
-  cursor: grab;
-`;
-
-export const Area = styled("textarea")`
-  display: block;
-  width: 100%;
-  outline: none;
-  border: none;
-
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`;
+import { Area, Card } from "./Task.styled";
 
 interface IProps {
   data: TaskType;
@@ -42,19 +13,23 @@ interface IProps {
 }
 
 const Task: FC<IProps> = ({ data, isNewTask }) => {
-  const dispatch = useDispatch();
   const { openTrash, closeTrash } = useTrashContext();
-
   const [value, setValue] = useState<string>(data.value);
   const [isEditMode, setIsEditMode] = useState<boolean>(isNewTask);
-
+  const dispatch = useDispatch();
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  useEffect(() => {
+  const taskUpdate = (value: string) => {
     if (data.value !== value) {
       dispatch(updateTask({ ...data, value }));
     }
-  }, [value, dispatch, data]);
+  };
+
+  const debouncedTaskUpdate = useDebouncedCallback(taskUpdate, 500);
+
+  useEffect(() => {
+    debouncedTaskUpdate(value);
+  }, [value, debouncedTaskUpdate]);
 
   useEffect(() => {
     if (inputRef.current && isEditMode) {

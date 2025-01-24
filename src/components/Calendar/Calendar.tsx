@@ -1,39 +1,13 @@
-import styled from "styled-components";
 import { useSelector } from "react-redux";
 
 import Day from "../Day";
 import useCalendar from "@/hooks/useCalendar";
 
+import { RootState } from "@/redux/store";
 import { calculateMonthCalendar, calculateWeekCalendar } from "../../helpers/calculateCalendar";
 import { selectTasksByDates } from "@/redux/tasks/selectors";
 import { areDatesEqual } from "@/utils/date";
-import { RootState } from "@/redux/store";
-
-export const Wrapper = styled("div")`
-  height: 100%;
-`;
-
-export const MonthList = styled("ul")`
-  display: grid;
-
-  height: 100%;
-
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  grid-template-rows: repeat(6, minmax(0, 1fr));
-
-  gap: 5px;
-`;
-
-export const WeekList = styled("ul")`
-  display: grid;
-  height: 100%;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 5px;
-`;
-
-export const Item = styled("li")`
-  /* outline: 1px solid green; */
-`;
+import { Item, ListWrapper, Wrapper } from "./Calendar.styled";
 
 const Calendar = () => {
   const { monthDate, weekDate, isMonthMode } = useCalendar();
@@ -46,8 +20,6 @@ const Calendar = () => {
     selectTasksByDates(state, calendar[0], calendar.length)
   );
 
-  console.log(tasks);
-
   const findDayTasks = (dayDate: Date) =>
     tasks
       .filter(({ date }) => areDatesEqual(dayDate, new Date(date)))
@@ -56,31 +28,17 @@ const Calendar = () => {
   return (
     <>
       <Wrapper>
-        {isMonthMode ? (
-          <MonthList>
-            {calendar.map(date => (
-              <Item key={date.toString()}>
-                <Day
-                  date={date}
-                  tasks={findDayTasks(date)}
-                  isCurrentMonth={monthDate.getMonth() === date.getMonth()}
-                />
-              </Item>
-            ))}
-          </MonthList>
-        ) : (
-          <WeekList>
-            {calendar.map(date => (
-              <Item key={date.toString()}>
-                <Day
-                  date={date}
-                  tasks={findDayTasks(date)}
-                  isCurrentMonth={monthDate.getMonth() === date.getMonth()}
-                />
-              </Item>
-            ))}
-          </WeekList>
-        )}
+        <ListWrapper $monthmode={isMonthMode}>
+          {calendar.map(date => (
+            <Item key={date.toString()}>
+              <Day
+                date={date}
+                tasks={findDayTasks(date)}
+                isCurrentMonth={monthDate.getMonth() === date.getMonth()}
+              />
+            </Item>
+          ))}
+        </ListWrapper>
       </Wrapper>
     </>
   );

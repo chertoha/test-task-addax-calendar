@@ -91,4 +91,46 @@ export const initialTasks: TaskType[] = [
     date: "2025-02-18T00:00:00.000Z",
     order: 1,
   },
+
+  {
+    id: 14,
+    value: "New Trello for Charitable Donations",
+    date: "2025-02-03T00:00:00.000Z",
+    order: 1,
+  },
+
+  {
+    id: 15,
+    value: "New Kickstarter Case Study",
+    date: "2025-02-05T00:00:00.000Z",
+    order: 1,
+  },
+
+  {
+    id: 16,
+    value: "New Wedding Planning With Trello",
+    date: "2025-02-10T00:00:00.000Z",
+    order: 1,
+  },
+
+  {
+    id: 17,
+    value: "New Common Questions",
+    date: "2025-02-10T00:00:00.000Z",
+    order: 2,
+  },
+
+  {
+    id: 18,
+    value: "New Using Multiple Boards for a Super Effective Workflow",
+    date: "2025-02-10T00:00:00.000Z",
+    order: 3,
+  },
+
+  {
+    id: 19,
+    value: "New The Pomodorro Technique",
+    date: "2025-02-18T00:00:00.000Z",
+    order: 1,
+  },
 ];

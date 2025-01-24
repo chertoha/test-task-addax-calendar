@@ -1,83 +1,27 @@
-import styled from "styled-components";
-import { addDays, dateToShortDayMonthString, MONTHS } from "@/utils/date";
 import useCalendar from "@/hooks/useCalendar";
-import { calculateStartDate, DAYS_IN_WEEK } from "@/helpers/calculateCalendar";
-import { useDispatch, useSelector } from "react-redux";
-import { selectSearch } from "@/redux/tasks/selectors";
-import { updateSearch } from "@/redux/tasks/slice";
+import Title from "./Title";
+import Search from "./Search";
+import NavButtons from "./NavButtons";
+import ModeButtons from "./ModeButtons";
 
-export const Wrapper = styled("header")`
-  padding: 0 100px;
-  width: 100%;
-  height: 100px;
-  flex-shrink: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const Buttons = styled("div")`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-`;
-
-export const EndToolsWrapper = styled("div")`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-`;
+import { Button } from "../UIKit/Button/Button.styled";
+import { EndToolsWrapper, StartToolsWrapper, Wrapper } from "./Header.styled";
 
 const Header = () => {
-  const {
-    isMonthMode,
-    nextWeek,
-    prevWeek,
-    toMonthMode,
-    toWeekMode,
-    nextMonth,
-    prevMonth,
-    monthDate,
-    weekDate,
-  } = useCalendar();
+  const { resetCalendar } = useCalendar();
 
-  const search = useSelector(selectSearch);
-  const dispatch = useDispatch();
-
-  const from = weekDate ? weekDate : calculateStartDate(monthDate);
-  const to = addDays(from, DAYS_IN_WEEK - 1);
   return (
     <Wrapper>
-      <Buttons>
-        <button onClick={isMonthMode ? prevMonth : prevWeek}>{"<"}</button>
+      <StartToolsWrapper>
+        <NavButtons />
+        <Button onClick={resetCalendar}>Today</Button>
+      </StartToolsWrapper>
 
-        <button onClick={isMonthMode ? nextMonth : nextWeek}>{">"}</button>
-      </Buttons>
-
-      {isMonthMode ? (
-        <p>
-          {MONTHS[monthDate.getMonth()].name} {monthDate.getFullYear()}
-        </p>
-      ) : (
-        <p>
-          {dateToShortDayMonthString(from)} - {dateToShortDayMonthString(to)}
-        </p>
-      )}
+      <Title />
 
       <EndToolsWrapper>
-        <input
-          type="text"
-          placeholder="Search tasks"
-          value={search}
-          onChange={e => dispatch(updateSearch(e.target.value))}
-        />
-
-        <Buttons>
-          <button onClick={toWeekMode}>Week</button>
-
-          <button onClick={toMonthMode}>Month</button>
-        </Buttons>
+        <Search />
+        <ModeButtons />
       </EndToolsWrapper>
     </Wrapper>
   );

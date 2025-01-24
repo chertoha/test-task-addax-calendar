@@ -6,6 +6,7 @@ import {
   decreaseWeekDate,
   increaseMonthDate,
   increaseWeekDate,
+  resetCalendarState,
   setMonthDate,
   setMonthMode,
   setWeekMode,
@@ -51,6 +52,10 @@ const useCalendar = () => {
     dispatch(increaseWeekDate());
   };
 
+  const resetCalendar = () => {
+    dispatch(resetCalendarState());
+  };
+
   return {
     monthDate: new Date(monthDate),
     weekDate: weekDate ? new Date(weekDate) : null,
@@ -61,6 +66,7 @@ const useCalendar = () => {
     nextMonth,
     prevWeek,
     nextWeek,
+    resetCalendar,
   };
 };
 

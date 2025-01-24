@@ -1,7 +1,12 @@
-import { calculateStartDate, DAYS_IN_WEEK } from "@/helpers/calculateCalendar";
-import { addDays, addMonths } from "@/utils/date";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+
+import {
+  calculateStartDate,
+  DAYS_IN_WEEK,
+  getStartTodayMonthDate,
+} from "@/helpers/calculateCalendar";
+import { addDays, addMonths } from "@/utils/date";
 
 type InitialState = {
   monthDate: string;
@@ -9,11 +14,8 @@ type InitialState = {
   isMonthMode: boolean;
 };
 
-const today = new Date();
-const startMonthDate = new Date(today.getFullYear(), today.getMonth(), 1);
-
 const initialState: InitialState = {
-  monthDate: startMonthDate.toISOString(),
+  monthDate: getStartTodayMonthDate().toISOString(),
   weekDate: null,
   isMonthMode: true,
 };
@@ -80,6 +82,8 @@ const calendarSlice = createSlice({
     setWeekMode: state => {
       state.isMonthMode = false;
     },
+
+    resetCalendarState: () => initialState,
   },
 });
 
@@ -93,6 +97,7 @@ export const {
   increaseMonthDate,
   decreaseWeekDate,
   increaseWeekDate,
+  resetCalendarState,
 } = calendarSlice.actions;
 
 export default calendarSlice;

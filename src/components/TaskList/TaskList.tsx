@@ -1,17 +1,12 @@
-import styled from "styled-components";
-import Task from "../Task/Task";
-import { TaskType } from "../../types/entities";
 import { DragEvent, FC } from "react";
-import Slot from "../Slot";
 import { nanoid } from "@reduxjs/toolkit";
+
+import Task from "../Task/Task";
+import Slot from "../Slot";
 import shuffleTasks from "@/helpers/shuffleTasks";
 
-export const List = styled("ul")`
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`;
+import { TaskType } from "../../types/entities";
+import { List } from "./TaskList.styled";
 
 interface IProps {
   list: TaskType[];
@@ -31,8 +26,6 @@ const TaskList: FC<IProps> = ({ list, date, newTaskId }) => {
   const movingTaskHandler = (index: number, task: TaskType) => {
     shuffleTasks(slotList, index, task, date);
   };
-
-  // console.log(slotList);
 
   return (
     <List onDragOver={handleListDragOver}>

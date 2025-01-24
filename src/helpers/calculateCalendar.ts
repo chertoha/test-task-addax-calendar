@@ -31,3 +31,8 @@ export function calculateStartDate(date: Date) {
 function createDateList(startDate: Date, daysNum: number) {
   return Array.from(Array(daysNum)).map((_, i, arr) => (arr[i] = addDays(startDate, i)));
 }
+
+export function getStartTodayMonthDate() {
+  const today = new Date();
+  return new Date(today.getFullYear(), today.getMonth(), 1);
+}

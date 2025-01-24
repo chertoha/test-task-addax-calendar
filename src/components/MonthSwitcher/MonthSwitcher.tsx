@@ -1,14 +1,8 @@
-import useCalendar from "@/hooks/useCalendar";
 import { DragEvent, FC, useState } from "react";
-import styled from "styled-components";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 
-export const Wrapper = styled("div")<{ $hovered: boolean }>`
-  background-color: ${p => (p.$hovered ? "#edf3ed" : "#ffffff")};
-  height: 30px;
-  flex-shrink: 0;
-
-  transition: background-color 250ms ease-in-out;
-`;
+import useCalendar from "@/hooks/useCalendar";
+import { Wrapper } from "./MonthSwitcher.styled";
 
 interface IProps {
   next?: boolean;
@@ -52,9 +46,12 @@ const MonthSwitcher: FC<IProps> = ({ next = false }) => {
   return (
     <Wrapper
       $hovered={isHovered}
+      $next={next}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
-    ></Wrapper>
+    >
+      {next ? <FaChevronDown size={18} /> : <FaChevronUp size={18} />}
+    </Wrapper>
   );
 };
 
