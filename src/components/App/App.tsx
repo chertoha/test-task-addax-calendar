@@ -3,10 +3,17 @@ import Trash from "../Trash";
 import Header from "../Header";
 import MonthSwitcher from "../MonthSwitcher";
 import DayList from "../DayList";
+import styled from "styled-components";
+
+export const MainContainer = styled("main")`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+`;
 
 const App = () => {
   return (
-    <main style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+    <MainContainer>
       <Header />
       <Trash />
 
@@ -22,7 +29,7 @@ const App = () => {
       <div style={{ marginTop: "5px" }}>
         <MonthSwitcher next />
       </div>
-    </main>
+    </MainContainer>
   );
 };
 
