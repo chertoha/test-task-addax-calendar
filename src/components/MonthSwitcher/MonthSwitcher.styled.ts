@@ -4,7 +4,7 @@ export const Wrapper = styled("div")<{ $hovered: boolean; $next: boolean }>`
   height: 30px;
   flex-shrink: 0;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   color: rgba(92, 131, 155, 0.208);
 

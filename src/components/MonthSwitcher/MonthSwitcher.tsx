@@ -50,7 +50,11 @@ const MonthSwitcher: FC<IProps> = ({ next = false }) => {
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
     >
+      <p>Drag task here to chage a month or a week</p>
+
       {next ? <FaChevronDown size={18} /> : <FaChevronUp size={18} />}
+
+      <p>Drag task here to chage a month or a week</p>
     </Wrapper>
   );
 };
