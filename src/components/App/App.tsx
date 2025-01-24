@@ -3,32 +3,34 @@ import Trash from "../Trash";
 import Header from "../Header";
 import MonthSwitcher from "../MonthSwitcher";
 import DayList from "../DayList";
-import styled from "styled-components";
 
-export const MainContainer = styled("main")`
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-`;
+import {
+  BottomSwitcherWrapper,
+  CalendarWrapper,
+  MainContainer,
+  TopSwitcherWrapper,
+} from "./App.styled";
 
 const App = () => {
   return (
     <MainContainer>
       <Header />
+
       <Trash />
 
       <DayList />
-      <div style={{ marginBottom: "5px" }}>
+
+      <TopSwitcherWrapper>
         <MonthSwitcher />
-      </div>
+      </TopSwitcherWrapper>
 
-      <div style={{ flexGrow: 1, overflow: "hidden" }}>
+      <CalendarWrapper>
         <Calendar />
-      </div>
+      </CalendarWrapper>
 
-      <div style={{ marginTop: "5px" }}>
+      <BottomSwitcherWrapper>
         <MonthSwitcher next />
-      </div>
+      </BottomSwitcherWrapper>
     </MainContainer>
   );
 };

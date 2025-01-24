@@ -1,11 +1,12 @@
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+
 import {
   calculateStartDate,
   DAYS_IN_WEEK,
   getStartTodayMonthDate,
 } from "@/helpers/calculateCalendar";
 import { addDays, addMonths } from "@/utils/date";
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
 
 type InitialState = {
   monthDate: string;

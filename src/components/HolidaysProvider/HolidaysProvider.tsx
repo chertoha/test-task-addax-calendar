@@ -1,6 +1,7 @@
+import { FC, ReactNode } from "react";
+
 import { HolidaysContext } from "@/hooks/useHolidaysContext";
 import { useGetHolidaysQuery } from "@/redux/holidays/holidaysApi";
-import { FC, ReactNode } from "react";
 
 interface IProps {
   children: ReactNode;

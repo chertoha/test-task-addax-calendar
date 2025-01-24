@@ -1,5 +1,5 @@
-import { TrashContext } from "@/hooks/useTrashContext";
 import { FC, ReactNode, useState } from "react";
+import { TrashContext } from "@/hooks/useTrashContext";
 
 interface IProps {
   children: ReactNode;
