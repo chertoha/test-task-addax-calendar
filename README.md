@@ -1,6 +1,6 @@
 # Test task for Addax
 
-Task Calendar. It is user friendly to create tasks and move theme to any date in calendar.
+Task Calendar. It is user friendly to create tasks and move theme to any date in calendar. [Watch demo here](https://www.loom.com/share/ba5a6f80b2f04a65a43b5b94051c49b3)
 
 You are able to run application with : [Vercel deploy link](https://test-task-addax-calendar.vercel.app/)
 
